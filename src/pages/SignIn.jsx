@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Loading } from '../components'
 import { API } from '../utilities';
 
-function SignIn() {
+function SignInPage() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('')
@@ -74,4 +74,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignInPage;

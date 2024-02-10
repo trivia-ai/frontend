@@ -58,7 +58,7 @@ const quizData = [
 ];
 
 
-const Quiz = () => {
+const QuizPage = () => {
     const { course, topic, quizid } = useParams();
 
     const [tabVal, setTabVal] = useState(0);
@@ -125,7 +125,7 @@ const Quiz = () => {
     );
 }
 
-export default Quiz;
+export default QuizPage;
 
 const CustomTabPanel = (props) => {
     const { children, value, index, ...other } = props;

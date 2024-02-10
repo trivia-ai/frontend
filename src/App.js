@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { 
-  SignUp as SignUpPage, 
-  SignIn as SignInPage, 
-  Courses as CoursesPage, 
-  Course as CoursePage, 
-  CourseTopic as CourseTopicPage, 
-  Quiz as QuizPage
+  SignUpPage, 
+  SignInPage, 
+  CourseListPage, 
+  CoursePage, 
+  TopicPage, 
+  QuizPage
 } from './pages'
 import { Layout } from './components'
 
@@ -47,9 +47,9 @@ function App() {
           <Routes>
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/signin" element={<SignInPage />} />
-            <Route path="/" element={<CoursesPage />} />
-            <Route path="/course/:name" element={<CoursePage />} />
-            <Route path="/course/:course/topic/:topic" element={<CourseTopicPage />} />
+            <Route path="/" element={<CourseListPage />} />
+            <Route path="/course/:courseId" element={<CoursePage />} />
+            <Route path="/course/:course/topic/:topic" element={<TopicPage />} />
             <Route path="/course/:course/topic/:topic/quiz/:quizid" element={<QuizPage />} />
           </Routes>
         </Layout>

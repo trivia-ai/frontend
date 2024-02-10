@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 import { CardCourses, Loading } from '../components'
 import { API } from '../utilities'
 
-const Courses = () => {
+const CourseListPage = () => {
   const email = localStorage.getItem('userEmail')
 
   const [courseName, setCourseName] = useState('')
@@ -101,4 +101,4 @@ const Courses = () => {
   );
 }
 
-export default Courses;
+export default CourseListPage;

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Grid, TextField, Button, Radio, RadioGroup, FormControlLabel } from '@mui/material';
 import { CardQuiz, Dropzone } from '../components'
 
-const CourseTopic = () => {
+const TopicPage = () => {
     const { course, topic } = useParams();
 
     const SAVEDQUIZ = [
@@ -76,4 +76,4 @@ const CourseTopic = () => {
     );
 }
 
-export default CourseTopic;
+export default TopicPage;

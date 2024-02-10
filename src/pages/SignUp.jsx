@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Loading } from '../components'
 import { API } from '../utilities';
 
-function SignUp() {
+function SignUpPage() {
   const navigate = useNavigate();
 
   const [name, setName] = useState('')
@@ -92,4 +92,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpPage;

@@ -1,9 +1,16 @@
 import { Button, TextField, Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { CardTopic } from '../components'
+import { CardTopic, Loading } from '../components'
+import { API } from '../utilities'
+import { useEffect } from 'react';
 
-const Course = () => {
-    const { name } = useParams();
+const CoursePage = () => {
+    const { courseId } = useParams();
+    const email = localStorage.getItem('userEmail')
+
+    useEffect(() => {
+
+    }, [])
 
     const DESC = 'this is a short description of the subject'
 
@@ -15,7 +22,7 @@ const Course = () => {
 
   return (
     <div>
-      <h1 className='page_heading'>{name}</h1>
+      <h1 className='page_heading'>{courseId}</h1>
       <p className='page_subheading'>{DESC}</p>
 
       <div className='input_container'>
@@ -26,7 +33,7 @@ const Course = () => {
       <Grid container spacing={5}>
         {TOPICS.map((course, index) => (
           <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-            <CardTopic course={name} id={course.id} name={course.name} color={course.color} />
+            <CardTopic course={courseId} id={course.id} name={course.name} color={course.color} />
           </Grid>
         ))}
       </Grid>
@@ -35,4 +42,4 @@ const Course = () => {
   );
 }
 
-export default Course;
+export default CoursePage;
