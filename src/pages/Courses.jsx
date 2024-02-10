@@ -1,7 +1,24 @@
+import { useEffect } from 'react';
 import { Grid, TextField, Button } from '@mui/material';
 import { CardCourses } from '../components'
+import { API } from '../utilities'
 
 const Courses = () => {
+
+  useEffect(() => {
+
+    const handleGetSubjects = async () => {
+      try {
+        const res = await API.getUserData({email:'r@gmail.com'});
+        console.log(res)
+        // setSubjects(res.data);
+      } catch (error) {
+        console.error('Error fetching subjects:', error);
+      }
+    };
+
+    handleGetSubjects();
+  }, [])
 
   const COURSES = [
     {name: 'Analysis of Algorithms', desc: 'this is a short description of the subject', id: '01', color:'#FF6D46'},

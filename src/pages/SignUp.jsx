@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import { Loading } from '../components'
 import { API } from '../utilities';
 
 function SignUp() {
@@ -8,6 +10,7 @@ function SignUp() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleNameChange = (e) => setName(e.target.value)
   const handleEmailChange = (e) => setEmail(e.target.value)
@@ -17,17 +20,28 @@ function SignUp() {
     e.preventDefault();
     try {
       const data = { name, email, password }
-      const res = await API.signup(data);
-      console.log(res)
-      navigate('/signin')
+      setIsLoading(true)
+      const res = await API.signup(data)
+      setIsLoading(false)
+      console.log('SIGN UP SUCCESS --- ', res)
+      toast('User created Successfully', { 
+        theme: "dark",
+        autoClose: 500,
+        onClose: () =>  navigate('/signin')
+      });
     } catch (error) {
       console.error('Error calling Create User:', error);
+      toast.error('Bad Request: User could not be created', { theme: "dark" });
+      setIsLoading(false)
     }
   }
 
   return (
     <div className="auth_container">
       <h2 className='page_heading'>Sign Up</h2>
+
+      <ToastContainer />
+      <Loading isLoading={isLoading} />
 
       <form className="authForm_container">
 

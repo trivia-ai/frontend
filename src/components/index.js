@@ -10,3 +10,6 @@ export { default as Dropzone } from './Dropzone'
 
 // Quizlet
 export { default as QuizApp } from './CardQuizlet'
+
+// Loading
+export { default as Loading } from './Loading'
