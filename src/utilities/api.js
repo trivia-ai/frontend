@@ -20,12 +20,13 @@ const mlApi = axios.create({
 const apiEndpoints = {
     signup: '/function-9',
     login: '/function-10',
-    
+
     addSubject: '/function-6',
     getSubjects: '/function-2',
 
-    getUserData: '/function-1',
     getTopics: '/function-3',
+
+    getUserData: '/function-1',
     getQuizzes: '/function-4',
     getParticularQuiz: '/function-5',
     addNewAttempt: '/function-7',

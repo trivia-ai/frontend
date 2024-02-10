@@ -1,48 +1,98 @@
-import { useEffect } from 'react';
-import { Grid, TextField, Button } from '@mui/material';
-import { CardCourses } from '../components'
+import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import { Grid } from '@mui/material';
+import { CardCourses, Loading } from '../components'
 import { API } from '../utilities'
 
 const Courses = () => {
+  const email = localStorage.getItem('userEmail')
+
+  const [courseName, setCourseName] = useState('')
+  const [courseDesc, setCourseDesc] = useState('')
+
+  const handleCourseNameChange = (e) => setCourseName(e.target.value)
+  const handleCourseDescChange = (e) => setCourseDesc(e.target.value)
+
+  const [courses, setCourses] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-
-    const handleGetSubjects = async () => {
-      try {
-        const res = await API.getUserData({email:'r@gmail.com'});
-        console.log(res)
-        // setSubjects(res.data);
-      } catch (error) {
-        console.error('Error fetching subjects:', error);
-      }
-    };
-
     handleGetSubjects();
   }, [])
 
-  const COURSES = [
-    {name: 'Analysis of Algorithms', desc: 'this is a short description of the subject', id: '01', color:'#FF6D46'},
-    {name: 'Cloud Computing', desc: 'this is a short description of the subject', id: '02', color: '#45AB5F'},
-    {name: 'Cloud Computing', desc: 'this is a short description of the subject', id: '03', color: '#45AB5F'},
-    {name: 'Cloud Computing', desc: 'this is a short description of the subject', id: '04', color: '#45AB5F'},
-    {name: 'Programming Languages and Translator', desc: 'this is a short description of the subject', id: '05', color: '#FF6D46'},
-    {name: 'Programming Languages and Translator', desc: 'this is a short description of the subject', id: '06', color: '#FF6D46'},
-  ]
+  const handleGetSubjects = async () => {
+    try {
+      setIsLoading(true)
+      const res = await API.getSubjects({ email });
+      setIsLoading(false)
+      setCourses(res.data)
+      console.log('GET SUBJECTS SUCCESS --- ', res)
+    } catch (error) {
+      console.error('Error fetching subjects:', error);
+      setIsLoading(false)
+    }
+  };
+
+  const handlePostSubject = async () => {
+    try {
+      const data = {
+        email,
+        subject: courseName,
+        description: courseDesc
+      }
+      setIsLoading(true)
+      const res = await API.addSubject(data)
+      toast('Courses added Successfully', { theme: "dark" });
+      setIsLoading(false)
+      await handleGetSubjects()
+      setCourseName('')
+      setCourseDesc('')
+      console.log(res)
+    } catch (error) {
+      console.error('Error fetching subjects:', error);
+      toast.error('Bad Request: Course not added', { theme: "dark" });
+      setIsLoading(false)
+    }
+  }
 
   return (
     <div>
       <h1 className='page_heading'>Courses</h1>
 
+      <ToastContainer />
+      <Loading isLoading={isLoading} />
+
       <div className='input_container'>
-        <TextField style={{flex: '2', color: '#fff'}} fullWidth id="filled-basic" label="Name of the Course" variant="filled" color='secondary' />
-        <TextField style={{flex: '5'}} fullWidth id="filled-basic" label="Short Description of the Course" variant="filled" color='secondary' />
-        <Button style={{flex: '1'}} variant="contained" >ADD</Button>
+        <input 
+          style={{flex:2}} 
+          className="input" 
+          type="text" 
+          name="name" 
+          placeholder='Course Name...' 
+          required 
+          value={courseName}
+          onChange={handleCourseNameChange} 
+        />
+
+        <input 
+          style={{flex:2}} 
+          className="input" 
+          type="text" 
+          name="name" 
+          placeholder='Course Description...' 
+          required 
+          value={courseDesc}
+          onChange={handleCourseDescChange} 
+        />
+
+        <button style={{flex:1}} className="btn" type="submit" onClick={handlePostSubject}>Add Course</button>
       </div>
 
       <Grid container spacing={5}>
-        {COURSES.map((course, index) => (
+        {Array.isArray(courses) && courses.length > 0 && courses.map((course, index) => (
           <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-            <CardCourses id={course.id} name={course.name} desc={course.desc} score={course.score} color={course.color} />
+            <CardCourses id={index} name={course.subject} desc={course.description} color={'#FF6D46'} />
+            {/* 45AB5F */}
           </Grid>
         ))}
       </Grid>

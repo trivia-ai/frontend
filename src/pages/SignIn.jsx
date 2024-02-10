@@ -20,6 +20,7 @@ function SignIn() {
       const data = { email, password }
       setIsLoading(true)
       const res = await API.login(data);
+      localStorage.setItem('userEmail', email);
       setIsLoading(false)
       console.log('SIGN IN SUCCESS --- ', res)
       toast('User logged in Successfully', { 
