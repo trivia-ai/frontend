@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './components'
-import { SignUp, SignIn, Courses, Course, CourseTopic } from './pages'
+import { SignUp, SignIn, Courses, Course, CourseTopic, Quiz } from './pages'
 
 const theme = createTheme({
   palette: {
@@ -38,11 +38,12 @@ function App() {
       <Router>
         <Layout>
           <Routes>
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/" element={<Courses />} />
-          <Route path="/course/:name" element={<Course />} />
-          <Route path="/course/:course/topic/:topic" element={<CourseTopic />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/" element={<Courses />} />
+            <Route path="/course/:name" element={<Course />} />
+            <Route path="/course/:course/topic/:topic" element={<CourseTopic />} />
+            <Route path="/course/:course/topic/:topic/quiz/:quizid" element={<Quiz />} />
           </Routes>
         </Layout>
       </Router>

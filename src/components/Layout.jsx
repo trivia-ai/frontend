@@ -47,7 +47,11 @@ function DrawerAppBar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'grid', margin: '4rem' }}>
+    <Box sx={{ display: 'grid', margin: {
+      xs: '1rem',
+      sm: '3rem',
+      md: '4rem',
+    }}}>
       <CssBaseline />
       <AppBar component="nav">
         <Toolbar>

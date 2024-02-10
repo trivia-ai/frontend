@@ -29,9 +29,31 @@ body {
   color: #aaa;
   margin-bottom: 6rem;
 }
-
 .page_heading2 {
   font-size: 2.5rem !important;
+}
+.page_backgroundText {
+  position: absolute;
+  top: 5rem;
+  left: 5rem;
+  font-size: 15rem;
+  margin: 0;
+  color: #24232A;
+  z-index: -2;
+}
+.btn {
+  border: 3px solid #26262F;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  width: 100%;
+  background-color: #15141b;
+  color: #fff;
+}
+.btn:hover {
+  cursor: pointer;
+}
+.btn:active {
+  background-color: #09080c;
 }
 
 @media only screen and (min-width: 600px) {
@@ -124,4 +146,47 @@ body {
 }
 .dropzone_value {
   font-size: 0.8rem;
+}
+
+
+
+
+
+
+
+/* ## CARD QUIZ ## */
+.cardQuiz_container {
+  background-color: #24232A;
+  margin: 2rem 0;
+  padding: 2rem;
+}
+.cardQuiz_question {
+  font-size: 1.2rem;
+  margin-bottom: 5rem;
+}
+.cardQuiz_radio[type="radio"] {
+  display: none;
+}
+.cardQuiz_label {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 3px solid #3c3c43;
+  width: 100%;
+}
+.cardQuiz_radio[type="radio"]:checked + label {
+  border: 3px solid #2980b9;
+  background-color: #297fb916;
+}
+
+.cardQuiz_optionsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem 1rem;
+}
+.cardQuiz_intruction {
+  font-size: 0.9rem;
+  color: #7f7f8d;
 }
