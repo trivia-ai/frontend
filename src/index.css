@@ -1,14 +1,76 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #F0EDCC !important;
+:root {
+  --main-color: #24232A;
+  --secondary-color: #1E1D24;
+  --text-color: #fff;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--secondary-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* COMMON */
+.input_container {
+  margin-bottom: 3rem;
+  display: flex;
+  gap: 1rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .page_heading {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .page_heading {
+    font-size: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .page_heading {
+    font-size: 4rem;
+  }
+}
+
+
+
+
+
+
+/* CARD COURSE */
+.cardCourse_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 3px solid #2A2A33;
+  background-color: #26262F;
+  padding: 1rem;
+  height: 100%;
+}
+.cardCourse_container:hover {
+  cursor: pointer;
+}
+.cardCourse_id {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #3d3c43;
+  padding-left: 1rem;
+  border-left: 4px solid #000;
+}
+.cardCourse_name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+.cardCourse_desc {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #5A5960;
+  margin: 0;
 }

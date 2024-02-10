@@ -47,7 +47,7 @@ function DrawerAppBar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'grid', margin: '4rem' }}>
       <CssBaseline />
       <AppBar component="nav">
         <Toolbar>
@@ -95,9 +95,9 @@ function DrawerAppBar(props) {
       </nav>
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        <Typography>
+        <div>
           {children}
-        </Typography>
+        </div>
       </Box>
     </Box>
   );
