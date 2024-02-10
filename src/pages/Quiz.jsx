@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import { Tabs, Tab, Typography, Box, Grid } from '@mui/material';
 import { QuizApp } from '../components'
 
 

@@ -1,13 +1,7 @@
 import React, { useState } from 'react'
-import { CardQuiz, Dropzone } from '../components'
-import Grid from '@mui/material/Grid';
 import { useParams } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import { Grid, TextField, Button, Radio, RadioGroup, FormControlLabel } from '@mui/material';
+import { CardQuiz, Dropzone } from '../components'
 
 const CourseTopic = () => {
     const { course, topic } = useParams();

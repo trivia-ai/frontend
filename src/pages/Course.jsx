@@ -1,8 +1,6 @@
-import { CardTopic } from '../components'
-import Grid from '@mui/material/Grid';
+import { Button, TextField, Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { CardTopic } from '../components'
 
 const Course = () => {
     const { name } = useParams();

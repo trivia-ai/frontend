@@ -55,6 +55,15 @@ body {
 .btn:active {
   background-color: #09080c;
 }
+.input {
+  width: 100%;
+  padding: 1rem;
+  margin: 5px 0;
+}
+.input:focus {
+  outline: none;
+  border: 3px solid #2A2A33;
+}
 
 @media only screen and (min-width: 600px) {
   .page_heading {
@@ -189,4 +198,25 @@ body {
 .cardQuiz_intruction {
   font-size: 0.9rem;
   color: #7f7f8d;
+}
+
+
+/* ## AUTHENTICATION ## */
+.auth_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: calc(100vh - 15rem);
+}
+.authForm_container {
+  width: 30rem;
+  margin: 0 auto;
+}
+.authForm_subtext {
+  text-align: left;
+  font-size: 0.9rem;
+}
+.authForm_link {
+  color: #2980b9;
 }
