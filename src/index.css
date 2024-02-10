@@ -1,6 +1,6 @@
 :root {
   --main-color: #24232A;
-  --secondary-color: #1E1D24;
+  --secondary-color: #15141b;
   --text-color: #fff;
 }
 
@@ -19,10 +19,18 @@ body {
   display: flex;
   gap: 1rem;
 }
+.page_subheading {
+  color: #aaa;
+  margin-top: -2rem;
+  margin-bottom: 6rem;
+}
 
 @media only screen and (min-width: 600px) {
   .page_heading {
     font-size: 2rem;
+  }
+  .page_subheading {
+    font-size: 1rem;
   }
 }
 
@@ -30,11 +38,17 @@ body {
   .page_heading {
     font-size: 3rem;
   }
+  .page_subheading {
+    font-size: 1.5rem;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
   .page_heading {
     font-size: 4rem;
+  }
+  .page_subheading {
+    font-size: 2rem;
   }
 }
 
@@ -43,7 +57,7 @@ body {
 
 
 
-/* CARD COURSE */
+/* CARD COURSES (COURSE LIST) */
 .cardCourse_container {
   display: flex;
   flex-direction: column;
@@ -74,3 +88,5 @@ body {
   color: #5A5960;
   margin: 0;
 }
+
+/* CARD TOPIC (OF A SINGLE COURSE) */

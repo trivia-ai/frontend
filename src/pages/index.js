@@ -4,4 +4,4 @@ export { default as SignIn } from './SignIn'
 
 // Courses
 export { default as Courses } from './Courses'
-export { default as Topics } from './Topics'
+export { default as Course } from './Course'

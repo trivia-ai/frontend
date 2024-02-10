@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './components'
-import { SignUp, SignIn, Courses, Topics } from './pages'
+import { SignUp, SignIn, Courses, Course } from './pages'
 
 const theme = createTheme({
   palette: {
@@ -24,7 +24,7 @@ const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: '#aaa', // Set label color to #fff
+          color: '#aaa', 
         },
       },
     },
@@ -38,10 +38,10 @@ function App() {
       <Router>
         <Layout>
           <Routes>
-          <Route path="/" element={<Courses />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/course/:name" element={<Topics />} />
+          <Route path="/" element={<Courses />} />
+          <Route path="/course/:name" element={<Course />} />
           </Routes>
         </Layout>
       </Router>

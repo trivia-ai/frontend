@@ -1,9 +1,9 @@
-import { CardCourse } from '../components'
+import { CardCourses } from '../components'
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-function Courses() {
+const Courses = () => {
 
   const COURSES = [
     {name: 'Analysis of Algorithms', desc: 'this is a short description of the subject', id: '01', color:'#FF6D46'},
@@ -26,8 +26,8 @@ function Courses() {
 
       <Grid container spacing={5}>
         {COURSES.map((course, index) => (
-          <Grid item key={index} xs={12} sm={6} md={3} lg={2}>
-            <CardCourse id={course.id} name={course.name} desc={course.desc} score={course.score} color={course.color} />
+          <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+            <CardCourses id={course.id} name={course.name} desc={course.desc} score={course.score} color={course.color} />
           </Grid>
         ))}
       </Grid>

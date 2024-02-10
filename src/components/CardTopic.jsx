@@ -1,21 +1,15 @@
-import Slider from '@mui/material/Slider';
-import { Link } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 function CardTopic(props) {
-    const { name, score } = props
+    const { course, id, name, color } = props
+    const navigate = useNavigate();
 
     return (
-      <div className='cardCourse_container'>
-        <div>
-            <Link className='cardCourse_name' to={`/course/${name}`}>{name}</Link>
-        </div>
+      <div className='cardCourse_container' onClick={() => navigate(`/course/${course}/topic/${name}`)}>
+        <p className='cardCourse_id' style={{borderColor: color}}>{id}</p>
         <br/>
         <div>
-            <Slider defaultValue={score} size="small" aria-label="Disabled slider" />
-            <div className='cardCourse_progress_container'>
-                <span>Progress</span>
-                <span>{score}%</span>
-            </div>
+            <h3 className='cardCourse_name'>{name}</h3>
         </div>
       </div>
     );
