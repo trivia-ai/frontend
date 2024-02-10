@@ -4,7 +4,7 @@ import {
   SignUpPage, 
   SignInPage, 
   CourseListPage, 
-  CoursePage, 
+  TopicsListPage, 
   TopicPage, 
   QuizPage
 } from './pages'
@@ -48,7 +48,7 @@ function App() {
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/signin" element={<SignInPage />} />
             <Route path="/" element={<CourseListPage />} />
-            <Route path="/course/:courseId" element={<CoursePage />} />
+            <Route path="/course/:courseId" element={<TopicsListPage />} />
             <Route path="/course/:course/topic/:topic" element={<TopicPage />} />
             <Route path="/course/:course/topic/:topic/quiz/:quizid" element={<QuizPage />} />
           </Routes>
