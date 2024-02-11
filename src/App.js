@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { 
   SignUpPage, 
@@ -51,6 +51,10 @@ function App() {
             <Route path="/course/:courseId" element={<TopicsListPage />} />
             <Route path="/course/:courseId/topic/:topicId" element={<TopicPage />} />
             <Route path="/course/:courseId/topic/:topicId/quiz/:quizId" element={<QuizPage />} />
+            <Route
+                path="*"
+                element={<Navigate to="/signin" replace />}
+            />
           </Routes>
         </Layout>
       </Router>

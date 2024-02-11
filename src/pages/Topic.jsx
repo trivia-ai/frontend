@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { Grid, TextField, Button, Radio, RadioGroup, FormControlLabel } from '@mui/material';
-import { CardQuiz, Dropzone, Loading } from '../components'
+import { CardQuiz, Loading } from '../components'
 import { API } from '../utilities'
 import axios from 'axios'
 
@@ -10,9 +10,11 @@ const TopicPage = () => {
     const email = localStorage.getItem('userEmail')
 
     const [course, setCourse] = useState({})
-    const [topic, setTopic] = useState()
+    // const [topic, setTopic] = useState('')
     const [quizes, setQuizes] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+
+    const [pdfText, setPdfText] = useState('')
 
     const [topicName, setTopicName] = useState('')
     const handleTopicNameChange = (e) => setTopicName(e.target.value)
@@ -30,9 +32,8 @@ const TopicPage = () => {
             console.log('GET COURSE ---', courseRes.data[courseId])
 
             const topicsRes = await API.getTopics({ email, subject: courseRes.data[courseId].subject })
-            setTopic(topicsRes.data[topicId])
-            console.log('GET TOPICS ---', topicsRes.data[topicId])
-
+            // setTopic(topicsRes.data[topicId])
+            // console.log('GET TOPICS ---', topicsRes.data[topicId])
 
             const quizRes = await API.getQuizzes({ email, subject: courseRes.data[courseId].subject, topic: topicsRes.data[topicId]})
             console.log('GET QUIZ ---', quizRes.data[0].topics[topicId].quizzes)
@@ -46,13 +47,6 @@ const TopicPage = () => {
         }
     };
 
-    const SAVEDQUIZ = [
-        {name: 'Multi Select', id:'01', color: '#FF6D46', dateCreated:"14th Feb 2024"},
-        {name: 'Single Select', id:'02', color: '#FF6D46', dateCreated:"14th Feb 2024"},
-        {name: 'Flashcard', id:'03', color: '#FF6D46', dateCreated:"14th Feb 2024"},
-    ]
-
-
     const [quizRadio, setQuizRadio] = useState('single');
     const [quizNum, setQuizNum] = useState(10);
 
@@ -61,54 +55,50 @@ const TopicPage = () => {
 
 
 
-  const [file, setFile] = useState(null);
+    const [file, setFile] = useState(null);
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
+    const handleFileChange = (event) => {
+        setFile(event.target.files[0]);
+    };
 
-  const handleUpload = async () => {
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-    //   const response = await API.pdfToText(formData);
-
-      const response = await axios.post('https://us-central1-plt-gcp-401119.cloudfunctions.net/pdfToText', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error uploading file:', error);
+    const handleUpload = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+            const response = await axios.post('https://us-central1-plt-gcp-401119.cloudfunctions.net/pdfToText', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+            console.log(response.data);
+            setPdfText(response.data)
+        } catch (error) {
+            console.error('Error uploading file:', error);
+        }
     }
-  };
 
-//   const handleUpload = async () => {
-//     try {
-//       const reader = new FileReader();
-//       reader.onload = async () => {
-//         // Convert the binary string to Uint8Array
-//         const binaryData = new Uint8Array(reader.result);
+    const questionType = {
+        single: 1,
+        bool: 2,
+        flash: 3
+    }
 
-//         // Send the binary data using Axios
-//         const response = await axios.post('https://us-central1-plt-gcp-401119.cloudfunctions.net/pdfToText', binaryData, {
-//           headers: {
-//             'Content-Type': 'application/octet-stream',
-//           },
-//         });
+    const handleGenerateQuiz = async () => {
+        const data = {
+            email,
+            subject: course.subject,
+            topic: topicName,
+            data: pdfText,
+            questions_number: quizNum,
+            questions_type: questionType[quizRadio]
+        }
+        console.log(data)
 
-//         console.log(response.data);
-//       };
-
-//       // Read the file as a binary string
-//       reader.readAsArrayBuffer(file);
-//     } catch (error) {
-//       console.error('Error uploading file:', error);
-//     }
-//   };
-
+        try {
+            const res = await API.generateQuiz(data)
+            console.log(res.data.questions)
+        } catch (error) {
+            console.error('Error uploading file:', error);
+        }
+    }
 
     return (
         <div>
@@ -140,7 +130,6 @@ const TopicPage = () => {
                     
                     <RadioGroup row value={quizRadio} onChange={handleQuizRadioChange} style={{flex: '2'}}>
                         <FormControlLabel value="single" control={<Radio />} label="MCQ-Single" />
-                        <FormControlLabel value="multi" control={<Radio />} label="MCQ-Multi" />
                         <FormControlLabel value="flash" control={<Radio />} label="Flashcard" />
                         <FormControlLabel value="bool" control={<Radio />} label="True/False" />
                     </RadioGroup>
@@ -157,8 +146,8 @@ const TopicPage = () => {
                 </div>
 
 
-      
-                <Button variant="contained" >Generate Your Quizzzz!</Button>
+    
+                <Button variant="contained" onClick={handleGenerateQuiz} >Generate Your Quizzzz!</Button>
             </div>
 
 

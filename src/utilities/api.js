@@ -60,7 +60,11 @@ const client = {
 
     // functions for ML endpoints
     generateQuiz: (data) => mlApi.post(mlApiEndpoints.generateQuiz, data),
-    pdfToText: (data) => mlApi.post(mlApiEndpoints.pdfToText, data),
+    pdfToText: (data) => mlApi.post(mlApiEndpoints.pdfToText, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }),
 };
   
 
