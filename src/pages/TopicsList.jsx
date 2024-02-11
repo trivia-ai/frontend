@@ -49,9 +49,9 @@ const TopicsListPage = () => {
       </div>
 
       <Grid container spacing={5}>
-        {Array.isArray(topics) && topics.length > 0 && topics.map((course, index) => (
+        {Array.isArray(topics) && topics.length > 0 && topics.map((topic, index) => (
           <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-            <CardTopic course={courseId} id={course.id} name={course.name} color={course.color} />
+            <CardTopic courseId={courseId} topicId={index} name={topic} color={'#FF6D46'} />
           </Grid>
         ))}
       </Grid>

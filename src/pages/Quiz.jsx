@@ -59,7 +59,7 @@ const quizData = [
 
 
 const QuizPage = () => {
-    const { course, topic, quizid } = useParams();
+    const { courseId, topicId, quizId } = useParams();
 
     const [tabVal, setTabVal] = useState(0);
     const handleTabChange = (e, newVal) => setTabVal(newVal);
@@ -76,10 +76,10 @@ const QuizPage = () => {
 
     return (
         <div>
-            <h1 className='page_heading'>{course}</h1>
-            <p className='page_subheading'>{topic}</p>
+            <h1 className='page_heading'>{courseId}</h1>
+            <p className='page_subheading'>{topicId}</p>
 
-            <h1 className='page_backgroundText'>{quizid}</h1>
+            <h1 className='page_backgroundText'>{quizId}</h1>
 
             <div className='section'>
                 <h2 className='page_heading2'>Quiz</h2>

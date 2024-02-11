@@ -49,8 +49,8 @@ function App() {
             <Route path="/signin" element={<SignInPage />} />
             <Route path="/" element={<CourseListPage />} />
             <Route path="/course/:courseId" element={<TopicsListPage />} />
-            <Route path="/course/:course/topic/:topic" element={<TopicPage />} />
-            <Route path="/course/:course/topic/:topic/quiz/:quizid" element={<QuizPage />} />
+            <Route path="/course/:courseId/topic/:topicId" element={<TopicPage />} />
+            <Route path="/course/:courseId/topic/:topicId/quiz/:quizId" element={<QuizPage />} />
           </Routes>
         </Layout>
       </Router>

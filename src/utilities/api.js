@@ -47,10 +47,11 @@ const client = {
     getSubjects: (data) => api.post(apiEndpoints.getSubjects, data),
 
     getTopics: (data) => api.post(apiEndpoints.getTopics, data),
+    
+    getQuizzes: (data) => api.post(apiEndpoints.getQuizzes, data),
 
 
     getUserData: (data) => api.post(apiEndpoints.getUserData, data),
-    getQuizzes: (data) => api.post(apiEndpoints.getQuizzes, data),
     getParticularQuiz: (data) => api.post(apiEndpoints.getParticularQuiz, data),
     addNewAttempt: (data) => api.post(apiEndpoints.addNewAttempt, data),
     getUserPerformance: (data) => api.post(apiEndpoints.getUserPerformance, data),
