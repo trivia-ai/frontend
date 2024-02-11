@@ -34,8 +34,9 @@ const QuizForm = ({ quizData, courseName, topicName, time }) => {
     const handleSubmit = async () => {
         calculateScore();
         console.log(quizData, '))))))))')
-        const percentScore = Math.floor((score*100) / (quizData.length))
-        console.log(quizData)
+        const totalScore = quizData.length
+        const percentScore = Math.floor((score*100)/totalScore)
+        console.log(percentScore)
 
         const data = {
             email,

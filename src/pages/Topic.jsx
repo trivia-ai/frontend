@@ -71,7 +71,7 @@ const TopicPage = () => {
             const response = await axios.post('https://us-central1-plt-gcp-401119.cloudfunctions.net/pdfToText', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
-            console.log(response.data);
+            // console.log('file', file, response);
             setPdfText(response.data)
         } catch (error) {
             console.error('Error uploading file:', error);
@@ -121,12 +121,11 @@ const TopicPage = () => {
                         onChange={handleTopicNameChange} 
                     />
                 </div>
-                {/* <Dropzone /> */}
                 <br/>
 
                 <div>
-                <input type="file" onChange={handleFileChange} />
-                <button onClick={handleUpload}>Upload</button>
+                    <input type="file" onChange={handleFileChange} />
+                    <button onClick={handleUpload}>Upload</button>
                 </div>
 
                 <div className='input_container'>
