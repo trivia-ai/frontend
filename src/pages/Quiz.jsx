@@ -78,7 +78,7 @@ const QuizPage = () => {
 
             <Loading isLoading={isLoading} />
 
-            <h1 className='page_backgroundText'>{quizId}</h1>
+            <h1 className='page_backgroundText'>{parseInt(quizId) +1}</h1>
 
             <div className='section'>
                 <h2 className='page_heading2'>Quiz</h2>
