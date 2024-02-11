@@ -13,6 +13,7 @@ const QuizPage = () => {
     const handleTabChange = (e, newVal) => setTabVal(newVal);
 
     const [currQuiz, setCurrQuiz] = useState([])
+    const [timestamp, setTimestamp] = useState('')
 
     const [progress, setProgress] = useState([])
 
@@ -42,6 +43,8 @@ const QuizPage = () => {
 
             console.log(_allquiz[quizId])
 
+            setTimestamp(_allquiz[quizId].timestamp)
+
             if(_allquiz[quizId].attempts) {
                 setProgress(_allquiz[quizId].attempts)
             }
@@ -66,7 +69,7 @@ const QuizPage = () => {
         }
     };
 
-    const MYPROGRESSCol = ['time', 'sdsd'];
+    const MYPROGRESSCol = ['Score', 'Timstamp'];
 
     return (
         <div>
@@ -91,7 +94,7 @@ const QuizPage = () => {
 
                     {/* TAB 1 */}
                     <CustomTabPanel value={tabVal} index={0}>
-                        <QuizApp quizData={currQuiz} />
+                        <QuizApp quizData={currQuiz} courseName={courseName} topicName={topicName} time={timestamp} />
                     </CustomTabPanel>
 
                     {/* TAB 2 */}
@@ -106,13 +109,20 @@ const QuizPage = () => {
                             </Grid>
 
                             {/* Data Rows */}
-                            {progress.map((row, rowIndex) => (
-                                <Grid key={rowIndex} container item spacing={0} sx={{backgroundColor: '#26262F', margin: '4px 0', padding: '1rem'}}>
-                                    {progress.map((col) => (
-                                        <Grid key={col} item xs={3}> {row[col]}</Grid>
-                                    ))}
-                                </Grid>
-                            ))}
+                            {progress.map((row, rowIndex) => {
+                                console.log(row)
+                                return (
+                                    <Grid key={rowIndex} container item spacing={0} sx={{backgroundColor: '#26262F', margin: '4px 0', padding: '1rem'}}>
+                                        {Object.values(row).map((col) => {
+                                            console.log(col)
+                                            return (
+                                                <Grid key={col} item xs={3}> {col}</Grid>
+                                            )
+                                        })}
+                                    </Grid>
+                                )
+                            }
+                            )}
                         </Grid>
                     </CustomTabPanel>
                 </Box>

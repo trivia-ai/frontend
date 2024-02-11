@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { API } from '../utilities'
 
-const QuizForm = ({ quizData }) => {
+const QuizForm = ({ quizData, courseName, topicName, time }) => {
     const email = localStorage.getItem('userEmail')
     const [answers, setAnswers] = useState({});
     const [score, setScore] = useState(null);
@@ -30,20 +31,24 @@ const QuizForm = ({ quizData }) => {
         }));
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         calculateScore();
         console.log(quizData, '))))))))')
-        const percentScore = (score*100) / quizData.length
+        const percentScore = Math.floor((score*100) / (quizData.length))
+        console.log(quizData)
 
         const data = {
             email,
-            // subject: courseName,
-            // topic: topicName,
-            // timestamp: ,
+            subject: courseName,
+            topic: topicName,
+            timestamp: time,
             score: percentScore
         }
 
         console.log(data)
+
+        const res = await API.addNewAttempt(data);
+        console.log(res.data)
     };
 
     return (
