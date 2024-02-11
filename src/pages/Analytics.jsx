@@ -46,8 +46,11 @@ const AnalyticsPage = () => {
 
     const getChartData = (subject) => {
         const filteredData = filterDataBySubject(subject);
-        return filteredData.map((item, index) => ({ x: `Test ${index + 1}`, y: item.score[0] }));
+        return filteredData.flatMap((item, index) => (
+            item.score.map((score, scoreIndex) => ({ x: `Test ${index + 1} - Score ${scoreIndex + 1}`, y: score }))
+        ));
     };
+    
 
     const handleSubjectChange = (event) => {
         setSelectedSubject(event.target.value);
@@ -73,7 +76,7 @@ const AnalyticsPage = () => {
                             tickValues={chartData.map(data => data.subject)}
                             tickFormat={t => t}
                             style={{
-                                tickLabels: { fontSize: 8 },
+                                tickLabels: { fontSize: 5, angle: -45 },
                                 axis: { stroke: "#333333" },
                                 ticks: { size: 5 }
                             }}
@@ -121,7 +124,7 @@ const AnalyticsPage = () => {
                         >
                             <VictoryAxis
                                 style={{
-                                    tickLabels: { fontSize: 6 },
+                                    tickLabels: { fontSize: 4 , angle: -45 },
                                     axis: { stroke: "#333333" },
                                     ticks: { size: 5 }
                                 }} />
