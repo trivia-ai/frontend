@@ -26,7 +26,10 @@ function SignInPage() {
       toast('User logged in Successfully', { 
         theme: "dark",
         autoClose: 500,
-        onClose: () =>  navigate('/')
+        onClose: () => {
+          window.location.reload()
+          navigate('/')
+        } 
       });
     } catch (error) {
       console.error('Error calling Create User:', error);

@@ -231,3 +231,27 @@ body {
   width: fit-content;
   margin-right: 1rem;
 }
+
+
+
+/* RANDOM */
+.email_nav {
+  margin-left: 2rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+.fileinput_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fileinput_label {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+.newsection{
+  margin: 4rem 0;
+}
+.inputflex {
+  flex: 1;
+}

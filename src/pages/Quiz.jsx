@@ -69,7 +69,7 @@ const QuizPage = () => {
         }
     };
 
-    const MYPROGRESSCol = ['Score', 'Timstamp'];
+    const MYPROGRESSCol = ['Score', 'Date', 'Time'];
 
     return (
         <div>
@@ -87,7 +87,7 @@ const QuizPage = () => {
                 <Box sx={{ width: '100%' }}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <Tabs value={tabVal} onChange={handleTabChange} aria-label="basic tabs example">
-                            <Tab label="My Questions" {...tabProps(0)} style={{ color: '#fff' }} />
+                            <Tab label="Questions" {...tabProps(0)} style={{ color: '#fff' }} />
                             <Tab label="Previous Analytics" {...tabProps(1)} style={{ color: '#fff' }} />
                         </Tabs>
                     </Box>
@@ -109,20 +109,26 @@ const QuizPage = () => {
                             </Grid>
 
                             {/* Data Rows */}
-                            {progress.map((row, rowIndex) => {
-                                console.log(row)
-                                return (
-                                    <Grid key={rowIndex} container item spacing={0} sx={{backgroundColor: '#26262F', margin: '4px 0', padding: '1rem'}}>
-                                        {Object.values(row).map((col) => {
-                                            console.log(col)
-                                            return (
-                                                <Grid key={col} item xs={3}> {col}</Grid>
-                                            )
-                                        })}
-                                    </Grid>
-                                )
-                            }
-                            )}
+                            {progress.map((row, rowIndex) => (
+                            <Grid key={rowIndex} container item spacing={0} sx={{ backgroundColor: '#26262F', margin: '4px 0', padding: '1rem' }}>
+                                {Object.values(row).map((col, colIndex) => {
+                                    const isTimestamp = typeof col === 'string' && !isNaN(Date.parse(col));
+                                    return (
+                                        <>
+                                            {isTimestamp ? (
+                                                <>
+                                                    <Grid key={colIndex} item xs={3}>{new Date(col).toLocaleDateString()}</Grid>
+                                                    <Grid key={colIndex} item xs={3}>{new Date(col).toLocaleTimeString()}</Grid>
+                                                </>
+                                            ) : (
+                                                <Grid key={colIndex} item xs={3}>{col}</Grid>
+                                            )}
+                                        </>
+                                    );
+                                })}
+                            </Grid>
+                            ))}
+
                         </Grid>
                     </CustomTabPanel>
                 </Box>

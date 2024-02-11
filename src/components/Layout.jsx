@@ -4,13 +4,15 @@ import { Button, Typography, Toolbar, ListItemText, ListItemButton, ListItem, Li
 import MenuIcon from '@mui/icons-material/Menu';
 
 const drawerWidth = 240;
-const appName = 'EdQuiz'
+const appName = 'trivia.ai'
 
 const navItems = [
   {name:'Dashboard', link:'/'}
 ];
 
 function DrawerAppBar(props) {
+  const email = localStorage.getItem('userEmail')
+
   const { window, children } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -19,9 +21,14 @@ function DrawerAppBar(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('userEmail')
+    navigate('/signin')
+  }
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
+      <Typography variant="h6" sx={{ my: 2, fontWeight: '800' }}>
         {appName}
       </Typography>
       <Divider />
@@ -65,16 +72,26 @@ function DrawerAppBar(props) {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, fontWeight: '800' }}
           >
             {appName}
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
+            {email && navItems.map((item) => (
               <Button key={item.name} sx={{ color: '#fff' }} onClick={() => handleMenuClick(item.link)}>
                 {item.name}
               </Button>
             ))}
+
+            {email && 
+            <>
+              <Button sx={{ color: '#fff' }} onClick={handleLogout}> Logout </Button>
+              <span className='email_nav'>{email}</span>
+            </>}
+
+            
+
+              
           </Box>
         </Toolbar>
       </AppBar>

@@ -41,22 +41,27 @@ const theme = createTheme({
 });
 
 function App() {
+  const email = localStorage.getItem('userEmail')
+  console.log(email)
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Layout>
           <Routes>
+            {email ? (
+              <>
+                <Route path="/analytics" element={<AnalyticsPage />} />
+                <Route path="/" element={<CourseListPage />} />
+                <Route path="/course/:courseId" element={<TopicsListPage />} />
+                <Route path="/course/:courseId/topic/:topicId" element={<TopicPage />} />
+                <Route path="/course/:courseId/topic/:topicId/quiz/:quizId" element={<QuizPage />} />
+              </>
+            ) : (
+              <Route path="*" element={<Navigate to="/signup" replace />} />
+            )}
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/signin" element={<SignInPage />} />
-            <Route path="/analytics" element={<AnalyticsPage />} />
-            <Route path="/" element={<CourseListPage />} />
-            <Route path="/course/:courseId" element={<TopicsListPage />} />
-            <Route path="/course/:courseId/topic/:topicId" element={<TopicPage />} />
-            <Route path="/course/:courseId/topic/:topicId/quiz/:quizId" element={<QuizPage />} />
-            <Route
-                path="*"
-                element={<Navigate to="/signin" replace />}
-            />
           </Routes>
         </Layout>
       </Router>

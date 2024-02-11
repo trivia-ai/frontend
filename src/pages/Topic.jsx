@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import { Grid, TextField, Button, Radio, RadioGroup, FormControlLabel } from '@mui/material';
+import { Grid, Radio, RadioGroup, FormControlLabel } from '@mui/material';
+import { ToastContainer, toast } from 'react-toastify';
 import { CardQuiz, Loading } from '../components'
 import { API } from '../utilities'
 import axios from 'axios'
@@ -66,15 +67,20 @@ const TopicPage = () => {
 
     const handleUpload = async () => {
         try {
-            const formData = new FormData();
-            formData.append('file', file);
+            const formData = new FormData()
+            formData.append('file', file)
+            setIsLoading(true)
             const response = await axios.post('https://us-central1-plt-gcp-401119.cloudfunctions.net/pdfToText', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
-            });
-            // console.log('file', file, response);
+            })
+            console.log('file', file, response)
             setPdfText(response.data)
+            setIsLoading(false)
+            toast('File uploaded Successfully', { theme: "dark" })
         } catch (error) {
             console.error('Error uploading file:', error);
+            toast.error('Bad Request: File could not be uploaded', { theme: "dark" })
+            setIsLoading(false)
         }
     }
 
@@ -94,12 +100,17 @@ const TopicPage = () => {
             questions_type: questionType[quizRadio]
         }
         console.log(data)
-
         try {
+            setIsLoading(true)
             const res = await API.generateQuiz(data)
+            setIsLoading(false)
             console.log(res.data.questions)
+            toast('Quiz generated Successfully', { theme: "dark" })
+            // window.location.reload()
         } catch (error) {
             console.error('Error uploading file:', error);
+            toast.error('Bad Request: Could not generate the quiz', { theme: "dark" });
+            setIsLoading(false)
         }
     }
 
@@ -107,6 +118,7 @@ const TopicPage = () => {
         <div>
             <h1 className='page_heading'>{course.subject}</h1>
 
+            <ToastContainer />
             <Loading isLoading={isLoading} />
 
             <div className='section'>
@@ -121,35 +133,38 @@ const TopicPage = () => {
                         onChange={handleTopicNameChange} 
                     />
                 </div>
-                <br/>
 
-                <div>
-                    <input type="file" onChange={handleFileChange} />
-                    <button onClick={handleUpload}>Upload</button>
+                <div className='newsection'>
+                    <p className='fileinput_label'>Please upload the file you would like to create quiz from</p>
+                    <div className='fileinput_container'>
+                        <input type="file" onChange={handleFileChange} />
+                        <button className='btn' onClick={handleUpload}>Upload</button>
+                    </div>
                 </div>
 
-                <div className='input_container'>
-                    
+                <div className='newsection input_container'>
                     <RadioGroup row value={quizRadio} onChange={handleQuizRadioChange} style={{flex: '2'}}>
                         <FormControlLabel value="single" control={<Radio />} label="MCQ-Single" />
                         <FormControlLabel value="flash" control={<Radio />} label="Flashcard" />
                         <FormControlLabel value="bool" control={<Radio />} label="True/False" />
                     </RadioGroup>
-
-                    <TextField
-                        label="How many Questions"
-                        variant="outlined"
-                        type="number"
+                    <input 
+                        className="input inputflex" 
+                        type="number" 
+                        name="quiznumber" 
+                        placeholder='Number of Quiz questions...' 
+                        required 
                         value={quizNum}
-                        onChange={handleQuizNumChange}
-                        style={{ marginTop: '10px', flex: '1' }}
+                        onChange={handleQuizNumChange} 
                     />
-
                 </div>
 
+                <br/>
+                <br/>
+                <br/>
+                <br/>
 
-    
-                <Button variant="contained" onClick={handleGenerateQuiz} >Generate Your Quizzzz!</Button>
+                <button className='btn' onClick={handleGenerateQuiz}>Generate Your Quizzzz!</button>
             </div>
 
 
