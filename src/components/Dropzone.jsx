@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { API } from '../utilities';
 
 const DropzoneFileUploader = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -14,6 +15,17 @@ const DropzoneFileUploader = () => {
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
+
+  const handleUpload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('file', uploadedFiles);
+      const res = await API.pdfToText(formData);
+      console.log(res.data);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
 
   return (
     <div>
@@ -33,6 +45,8 @@ const DropzoneFileUploader = () => {
             ))}
         </>
       )}
+
+      <button onClick={handleUpload}>CHALLLL JAAAAA</button>
     </div>
   );
 };

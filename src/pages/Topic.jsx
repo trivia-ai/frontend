@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Grid, TextField, Button, Radio, RadioGroup, FormControlLabel } from '@mui/material';
 import { CardQuiz, Dropzone, Loading } from '../components'
 import { API } from '../utilities'
+import axios from 'axios'
 
 const TopicPage = () => {
     const { courseId, topicId } = useParams()
@@ -59,6 +60,56 @@ const TopicPage = () => {
     const handleQuizNumChange = (e) => setQuizNum(e.target.value);
 
 
+
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+    //   const response = await API.pdfToText(formData);
+
+      const response = await axios.post('https://us-central1-plt-gcp-401119.cloudfunctions.net/pdfToText', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
+
+//   const handleUpload = async () => {
+//     try {
+//       const reader = new FileReader();
+//       reader.onload = async () => {
+//         // Convert the binary string to Uint8Array
+//         const binaryData = new Uint8Array(reader.result);
+
+//         // Send the binary data using Axios
+//         const response = await axios.post('https://us-central1-plt-gcp-401119.cloudfunctions.net/pdfToText', binaryData, {
+//           headers: {
+//             'Content-Type': 'application/octet-stream',
+//           },
+//         });
+
+//         console.log(response.data);
+//       };
+
+//       // Read the file as a binary string
+//       reader.readAsArrayBuffer(file);
+//     } catch (error) {
+//       console.error('Error uploading file:', error);
+//     }
+//   };
+
+
     return (
         <div>
             <h1 className='page_heading'>{course.subject}</h1>
@@ -77,8 +128,13 @@ const TopicPage = () => {
                         onChange={handleTopicNameChange} 
                     />
                 </div>
-                <Dropzone />
+                {/* <Dropzone /> */}
                 <br/>
+
+                <div>
+                <input type="file" onChange={handleFileChange} />
+                <button onClick={handleUpload}>Upload</button>
+                </div>
 
                 <div className='input_container'>
                     

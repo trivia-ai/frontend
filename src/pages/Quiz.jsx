@@ -15,6 +15,9 @@ const QuizPage = () => {
     const [currQuiz, setCurrQuiz] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
+    const [courseName, setCourseName] = useState('')
+    const [topicName, setTopicName] = useState('')
+
     useEffect(() => {
         handleGetQuizByDate();
     }, [])
@@ -25,9 +28,11 @@ const QuizPage = () => {
 
             const courseRes = await API.getSubjects({ email })
             const _course = courseRes.data[courseId].subject
+            setCourseName(_course)
 
             const topicsRes = await API.getTopics({ email, subject: _course })
             const _topic = topicsRes.data[topicId]
+            setTopicName(_topic)
 
             const quizRes = await API.getQuizzes({ email, subject: _course, topic: _topic})
             const _allquiz = quizRes.data[0].topics[topicId].quizzes
@@ -55,8 +60,8 @@ const QuizPage = () => {
 
     return (
         <div>
-            <h1 className='page_heading'>{courseId}</h1>
-            <p className='page_subheading'>{topicId}</p>
+            <h1 className='page_heading'>{courseName}</h1>
+            <p className='page_subheading'>{topicName}</p>
 
             <Loading isLoading={isLoading} />
 
