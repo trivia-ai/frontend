@@ -6,7 +6,8 @@ import {
   CourseListPage, 
   TopicsListPage, 
   TopicPage, 
-  QuizPage
+  QuizPage,
+  AnalyticsPage
 } from './pages'
 import { Layout } from './components'
 
@@ -47,6 +48,7 @@ function App() {
           <Routes>
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/signin" element={<SignInPage />} />
+            <Route path="/analytics" element={<AnalyticsPage />} />
             <Route path="/" element={<CourseListPage />} />
             <Route path="/course/:courseId" element={<TopicsListPage />} />
             <Route path="/course/:courseId/topic/:topicId" element={<TopicPage />} />

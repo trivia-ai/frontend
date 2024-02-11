@@ -9,3 +9,6 @@ export { default as TopicPage } from './Topic' // SINGLE COURSE - SINGLE TOPIC
 
 // Quiz
 export { default as QuizPage } from './Quiz'
+
+// Analysis
+export { default as AnalyticsPage } from './Analytics'
