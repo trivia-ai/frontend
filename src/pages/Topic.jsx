@@ -11,7 +11,7 @@ const TopicPage = () => {
     const email = localStorage.getItem('userEmail')
 
     const [course, setCourse] = useState({})
-    // const [topic, setTopic] = useState('')
+    const [topic, setTopic] = useState('')
     const [quizes, setQuizes] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
@@ -33,8 +33,8 @@ const TopicPage = () => {
             console.log('GET COURSE ---', courseRes.data[courseId])
 
             const topicsRes = await API.getTopics({ email, subject: courseRes.data[courseId].subject })
-            // setTopic(topicsRes.data[topicId])
-            // console.log('GET TOPICS ---', topicsRes.data[topicId])
+            setTopic(topicsRes.data[topicId])
+            console.log('GET TOPICS ---', topicsRes.data[topicId])
 
             const quizRes = await API.getQuizzes({ email, subject: courseRes.data[courseId].subject, topic: topicsRes.data[topicId]})
             console.log(quizRes, '##########')
@@ -91,10 +91,11 @@ const TopicPage = () => {
     }
 
     const handleGenerateQuiz = async () => {
+        console.log(topic, topicName)
         const data = {
             email,
             subject: course.subject,
-            topic: topicName,
+            topic: topic ? topic : topicName,
             data: pdfText,
             questions_number: quizNum,
             questions_type: questionType[quizRadio]
@@ -106,7 +107,7 @@ const TopicPage = () => {
             setIsLoading(false)
             console.log(res.data.questions)
             toast('Quiz generated Successfully', { theme: "dark" })
-            // window.location.reload()
+            window.location.reload()
         } catch (error) {
             console.error('Error uploading file:', error);
             toast.error('Bad Request: Could not generate the quiz', { theme: "dark" });
@@ -129,7 +130,7 @@ const TopicPage = () => {
                         name="topic" 
                         placeholder='Topic Name...' 
                         required 
-                        value={topicName}
+                        value={topic ? topic : topicName}
                         onChange={handleTopicNameChange} 
                     />
                 </div>
