@@ -13,3 +13,5 @@ export { default as QuizApp } from './CardQuizlet'
 
 // Loading
 export { default as Loading } from './Loading'
+
+export { default as LineChart } from './LineChart'
