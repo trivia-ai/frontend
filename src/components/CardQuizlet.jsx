@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const QuizForm = ({ quizData }) => {
+    const email = localStorage.getItem('userEmail')
     const [answers, setAnswers] = useState({});
     const [score, setScore] = useState(null);
     const [showAnswers, setShowAnswers] = useState({});
@@ -31,6 +32,18 @@ const QuizForm = ({ quizData }) => {
 
     const handleSubmit = () => {
         calculateScore();
+        console.log(quizData, '))))))))')
+        const percentScore = (score*100) / quizData.length
+
+        const data = {
+            email,
+            // subject: courseName,
+            // topic: topicName,
+            // timestamp: ,
+            score: percentScore
+        }
+
+        console.log(data)
     };
 
     return (

@@ -13,6 +13,9 @@ const QuizPage = () => {
     const handleTabChange = (e, newVal) => setTabVal(newVal);
 
     const [currQuiz, setCurrQuiz] = useState([])
+
+    const [progress, setProgress] = useState([])
+
     const [isLoading, setIsLoading] = useState(false)
 
     const [courseName, setCourseName] = useState('')
@@ -37,8 +40,23 @@ const QuizPage = () => {
             const quizRes = await API.getQuizzes({ email, subject: _course, topic: _topic})
             const _allquiz = quizRes.data[0].topics[topicId].quizzes
 
-            setCurrQuiz(_allquiz[quizId].flashcards)
-            console.log(_allquiz[quizId].flashcards)
+            console.log(_allquiz[quizId])
+
+            if(_allquiz[quizId].attempts) {
+                setProgress(_allquiz[quizId].attempts)
+            }
+            console.log(_allquiz[quizId].attempts)
+
+            if(_allquiz[quizId].flashcards) {
+                console.log(_allquiz[quizId].flashcards)
+                setCurrQuiz(_allquiz[quizId].flashcards)
+            } else if(_allquiz[quizId].questions) {
+                console.log(_allquiz[quizId].questions)
+                setCurrQuiz(_allquiz[quizId].questions)
+            }
+
+            console.log(progress, 'skjdhfjshdjsjbsjbfsdhjbhb')
+
             
             setIsLoading(false)
         } 
@@ -48,15 +66,7 @@ const QuizPage = () => {
         }
     };
 
-    const MYPROGRESSRow = [
-        {Date:'12/03/2024', Time:'10:46pm', TimeTaken:'45 mins', Score:'56'},
-        {Date:'12/03/2024', Time:'10:46pm', TimeTaken:'45 mins', Score:'56'},
-        {Date:'12/03/2024', Time:'10:46pm', TimeTaken:'45', Score:'56'},
-        {Date:'12/03/2024', Time:'10:46pm', TimeTaken:'45', Score:'56'},
-        {Date:'12/03/2024', Time:'10:46pm', TimeTaken:'45', Score:'56'},
-    ]
-
-    const MYPROGRESSCol = Object.keys(MYPROGRESSRow[0]);
+    const MYPROGRESSCol = ['time', 'sdsd'];
 
     return (
         <div>
@@ -96,9 +106,9 @@ const QuizPage = () => {
                             </Grid>
 
                             {/* Data Rows */}
-                            {MYPROGRESSRow.map((row, rowIndex) => (
+                            {progress.map((row, rowIndex) => (
                                 <Grid key={rowIndex} container item spacing={0} sx={{backgroundColor: '#26262F', margin: '4px 0', padding: '1rem'}}>
-                                    {MYPROGRESSCol.map((col) => (
+                                    {progress.map((col) => (
                                         <Grid key={col} item xs={3}> {row[col]}</Grid>
                                     ))}
                                 </Grid>

@@ -36,6 +36,9 @@ const TopicPage = () => {
             // console.log('GET TOPICS ---', topicsRes.data[topicId])
 
             const quizRes = await API.getQuizzes({ email, subject: courseRes.data[courseId].subject, topic: topicsRes.data[topicId]})
+            console.log(quizRes, '##########')
+
+            console.log(topicId, 'topicId')
             console.log('GET QUIZ ---', quizRes.data[0].topics[topicId].quizzes)
             setQuizes(quizRes.data[0].topics[topicId].quizzes)
 
@@ -157,7 +160,7 @@ const TopicPage = () => {
                 <Grid container spacing={5}>
                     {quizes.map((quiz, index) => (
                     <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-                        <CardQuiz quizId={index} quizName={Object.keys(quiz)[0]} courseId={courseId} topicId={topicId} date={quiz.timetamp} color={'#FF6D46'} />
+                        <CardQuiz quizId={index} quizName={`quiz ${index + 1}`} courseId={courseId} topicId={topicId} date={quiz.timetamp} color={'#FF6D46'} />
                     </Grid>
                     ))}
                 </Grid>
