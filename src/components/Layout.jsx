@@ -7,7 +7,8 @@ const drawerWidth = 240;
 const appName = 'trivia.ai'
 
 const navItems = [
-  {name:'Dashboard', link:'/'}
+  {name:'Dashboard', link:'/'},
+  {name:'Analytics', link:'/analytics'},
 ];
 
 function DrawerAppBar(props) {

@@ -19,17 +19,6 @@ const QuizForm = ({ quizData, courseName, topicName, time }) => {
         }));
     };
 
-    // const calculateScore = () => {
-    //     let totalScore = 0;
-    //     quizData.forEach((question, index) => {
-    //         if (answers[index] === question.Answer) {
-    //             totalScore++;
-    //         }
-    //     });
-    //     console.log(totalScore)
-    //     setScore(totalScore);
-    // };
-
     const toggleAnswer = (questionIndex) => {
         setShowAnswers((prevShowAnswers) => ({
             ...prevShowAnswers,
