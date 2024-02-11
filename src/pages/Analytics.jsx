@@ -53,9 +53,9 @@ const AnalyticsPage = () => {
         setSelectedSubject(event.target.value);
     };
 
-    const availableSubjects = Array.from(new Set(performanceData.map(item => item.subject))).filter(subject => {
-        const dataCount = performanceData.filter(item => item.subject === subject).length;
-        return dataCount > 1;
+    const availableSubjects = Array.from(new Set(performanceData.map(item => item.subject)))
+    .filter(subject => {
+      return performanceData.filter(item => item.subject === subject && item.score.length > 1).length > 0;
     });
 
     return (
