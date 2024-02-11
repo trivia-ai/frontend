@@ -220,3 +220,14 @@ body {
 .authForm_link {
   color: #2980b9;
 }
+
+
+/* ## CARD QUIZ ## */
+.toggle_container {
+  width: 100%;
+}
+.toggle_btn {
+  font-size: 1rem;
+  width: fit-content;
+  margin-right: 1rem;
+}

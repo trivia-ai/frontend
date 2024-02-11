@@ -25,17 +25,18 @@ const apiEndpoints = {
     getSubjects: '/function-2',
 
     getTopics: '/function-3',
+    
+    getQuizzes: '/function-4',
+    getQuizByDate: '/function-5',
 
     getUserData: '/function-1',
-    getQuizzes: '/function-4',
-    getParticularQuiz: '/function-5',
     addNewAttempt: '/function-7',
     getUserPerformance: '/function-8',
 };
 
 const mlApiEndpoints = {
     generateQuiz: '/Generate_Quiz',
-    transcribeVideo: '/TranscribeVideo',
+    pdfToText: '/pdfToText',
 }
 
 const client = {
@@ -47,18 +48,19 @@ const client = {
     getSubjects: (data) => api.post(apiEndpoints.getSubjects, data),
 
     getTopics: (data) => api.post(apiEndpoints.getTopics, data),
-    
+
     getQuizzes: (data) => api.post(apiEndpoints.getQuizzes, data),
+    getQuizByDate: (data) => api.post(apiEndpoints.getQuizByDate, data),
 
 
     getUserData: (data) => api.post(apiEndpoints.getUserData, data),
-    getParticularQuiz: (data) => api.post(apiEndpoints.getParticularQuiz, data),
+    
     addNewAttempt: (data) => api.post(apiEndpoints.addNewAttempt, data),
     getUserPerformance: (data) => api.post(apiEndpoints.getUserPerformance, data),
 
     // functions for ML endpoints
     generateQuiz: (data) => mlApi.post(mlApiEndpoints.generateQuiz, data),
-    transcribeVideo: (data) => mlApi.post(mlApiEndpoints.transcribeVideo, data),
+    pdfToText: (data) => mlApi.post(mlApiEndpoints.pdfToText, data),
 };
   
 
